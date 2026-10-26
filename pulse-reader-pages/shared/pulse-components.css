@@ -1,0 +1,239 @@
+/* ==========================================================================
+   airZoon Pulse — Reader Page — fixed components
+   Masthead, cover badge, embedded reader, sign-up form, confirmation.
+   Every colour, radius and font comes from the tokens; a new magazine or
+   catalogue only changes the variant's token block, assets and copy.
+   ========================================================================== */
+
+/* ---- Masthead (replaces the hero photo) ----
+   A solid brand-colour band with the publication's tagline and logo. No
+   photo: the cover itself is the image, mounted on the card's top edge. */
+.az-hero-photo.rd-masthead{
+  height: var(--hero-h);
+  background: var(--masthead-bg);
+  color: var(--masthead-text);
+  display:flex; flex-direction:column; align-items:center;
+  padding: var(--masthead-pad-top) 20px 0; /* same side inset as the card stack */
+  gap: 16px;
+}
+.rd-tagline{
+  display:flex; align-items:center; gap:14px; width:100%; max-width:420px;
+  font-size:11px; font-weight:600; letter-spacing:.28em; text-transform:uppercase;
+  margin:0;
+}
+.rd-tagline::before,
+.rd-tagline::after{
+  content:""; flex:1; height:1px; background: currentColor; opacity:.6;
+}
+
+/* ---- Logo ----
+   The original MadinMag logo, never redrawn or substituted with a font.
+   On light backgrounds it is turned black with a filter, same shape.
+   Framed by a hairline above and below, as on the cover. Swap the file
+   for the vector logo once EWAG sends it. */
+.rd-wordmark{
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  width:100%; max-width:420px; margin:0;
+}
+.rd-logo{ width: var(--logo-w); height:auto; filter: var(--logo-filter, none); }
+.rd-wordmark-rule{ width:100%; height:1px; background: currentColor; opacity:.6; }
+
+/* ---- Background themes (preview toggle, future CMS field) ----
+   Fixed colours, so nothing has to change when next month's cover has
+   another colour: black, white, EWAG light pink #FBE8FC, or the EWAG
+   pink-to-cream gradient (#FCE8FF to #FFEBA3) from ewag.fr. */
+.splash-page-container{ background: var(--page-bg); }
+.splash-page-container[data-theme-bg="white"]{
+  --masthead-bg: #FFFFFF; --masthead-text: #111114; --page-bg: #F4F3F1; --logo-filter: brightness(0);
+}
+.splash-page-container[data-theme-bg="white"] .rd-masthead{ border-bottom: 1px solid #E6E2DD; }
+.splash-page-container[data-theme-bg="pink"]{
+  --masthead-bg: #FBE8FC; --masthead-text: #111114; --page-bg: #FFFFFF; --logo-filter: brightness(0);
+}
+.splash-page-container[data-theme-bg="ewag"]{
+  --masthead-bg: transparent; --masthead-text: #111114; --page-bg: #FFF7E8; --logo-filter: brightness(0);
+  background: linear-gradient(180deg, #FCE8FF 0%, #FFEBA3 520px, #FFF7E8 900px);
+}
+.splash-page-container[data-theme-bg="black"]{
+  --masthead-bg: #141416; --masthead-text: #FFFFFF; --page-bg: #ECEAE7; --logo-filter: none;
+}
+/* Light pages: cards need a visible edge instead of relying on contrast. */
+.splash-page-container[data-theme-bg="white"] .az-card,
+.splash-page-container[data-theme-bg="pink"] .az-card{ box-shadow: 0 6px 28px rgba(17,17,20,.10); border: 1px solid #EEE9E4; }
+
+/* ---- Header content (preview toggle) ----
+   The logo and the cover badge can be shown together or one at a time. */
+.splash-page-container[data-header="logo"] .rd-card-primary .az-logo-wrap{ display:none; }
+.splash-page-container[data-header="logo"] .rd-card-primary .az-card{ padding-top: var(--block-padding); }
+/* No cover to make room for: the band only needs to clear the raised card.
+   The logo spans the full width of the card below it. */
+.splash-page-container[data-header="logo"] .rd-masthead{ height:auto; padding-bottom: calc(var(--card-overlap) + 36px); }
+.splash-page-container[data-header="logo"] .rd-wordmark{ max-width: 560px; gap: 18px; }
+.splash-page-container[data-header="logo"] .rd-logo{ width:100%; }
+/* Cover only: a larger cover, in an empty band sized to hold it below
+   the top controls. Card padding = cover height - rise + gap. */
+.splash-page-container[data-header="cover"]{ --badge-w: 200px; --badge-rise: 160px; --card-pad-top: 152px; }
+@media (max-width: 820px){
+  .splash-page-container[data-header="cover"]{ --badge-w: 150px; --badge-rise: 110px; --card-pad-top: 128px; }
+}
+@media (max-height: 700px){
+  .splash-page-container[data-header="cover"]{ --badge-w: 110px; --badge-rise: 76px; --card-pad-top: 100px; }
+}
+.splash-page-container[data-header="cover"] .rd-wordmark{ display:none; }
+.splash-page-container[data-header="cover"] .rd-masthead{
+  height:auto; padding-top: 76px; padding-bottom: calc(var(--card-overlap) + var(--badge-rise));
+}
+
+/* "avec airZoon": the one airZoon mention the client asked for. Sits where
+   the airZoon pin mark sits on the sibling archetypes. */
+.az-mark{
+  display:flex; align-items:center; gap:6px;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(4px);
+  padding: 7px 12px 7px 8px; border-radius: 999px;
+  font-size:12px; font-weight:600; color:#3A3A3A;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  text-decoration:none; font-family: var(--font-body);
+}
+.az-mark img{ width:18px; height:auto; }
+
+/* ---- Layout stack ---- */
+.rd-stack{ max-width: 600px; margin: 0 auto; padding: 0 20px 20px; }
+.rd-stack .rd-card-primary{
+  margin-top: calc(-1 * var(--card-overlap));
+  position:relative; z-index:2;
+}
+.rd-card-primary .az-card{
+  position:relative;
+  box-shadow: 0 12px 34px rgba(0,0,0,.18);
+  padding-top: var(--card-pad-top);
+}
+.az-cell .az-card{ padding-bottom: calc(var(--block-padding) + 18px); }
+
+/* ---- Cover badge ----
+   Same role as the circular logo badge on the sibling archetypes, but
+   portrait-shaped: it is the issue's cover. Positioned from the card,
+   never from a wider container. */
+.az-logo-wrap{
+  position:absolute; left:50%; transform:translateX(-50%);
+  top: calc(-1 * var(--badge-rise)); z-index:3;
+}
+.rd-cover-badge{
+  width: var(--badge-w); aspect-ratio: 404 / 572;
+  background: var(--masthead-bg);
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+  border: 3px solid #fff;
+}
+.rd-cover-badge img{ width:100%; height:100%; object-fit:cover; }
+
+/* ---- Embedded reader ----
+   The provider's fixed-size embed (300×194) becomes a full-width,
+   responsive frame. Portrait on phones (one page at a time), landscape
+   on wider screens (double-page spread). */
+.rd-reader{ display:flex; flex-direction:column; gap:14px; scroll-margin-top: 20px; }
+.rd-reader-frame{
+  position:relative; width:100%; aspect-ratio: 3 / 4;
+  background: #2A2C30; overflow:hidden;
+  border-radius: var(--element-border-radius);
+}
+.rd-reader-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+@media (min-width: 821px){
+  .rd-reader-frame{ aspect-ratio: 4 / 3; }
+  .rd-reader-fullscreen{ display:none; }
+}
+.rd-reader-title{
+  font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--text-muted); text-align:center; margin:0 0 18px;
+}
+.rd-cell--reader{ scroll-margin-top: 16px; }
+.rd-cell--reader .az-card{ padding-top: 28px; }
+
+/* Separates the issue headline from the sign-up block when both share
+   the first card (sign-up-first variant). */
+.rd-divider{ border:0; border-top:1px solid var(--border); margin: 0 0 36px; }
+
+/* "Lire le magazine ↓": quiet link from the sign-up card down to the
+   reader, so the form never reads as a wall in front of the magazine. */
+.rd-skip-link{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  min-height:48px; margin: 18px auto 0;
+  font-size:15px; font-weight:600; color: var(--headline-color);
+  text-decoration: underline; text-underline-offset: 4px;
+}
+.rd-skip-link svg{ width:16px; height:16px; }
+/* After signing up, the confirmation already offers "Lire le magazine":
+   the skip link would repeat it right below. */
+.splash-page-container[data-flow-state="confirmed"] .rd-skip-link{ display:none; }
+
+/* ---- Sign-up block ("Ne ratez rien") ----
+   Same field look as the Giveaway form (reused from that archetype),
+   max 3 fields: first name, mobile or email, consent. */
+.signup-title{ font-size:30px; font-weight:800; line-height:1.1; letter-spacing:-0.01em; text-align:center; margin: 0 0 16px; }
+.signup-lead{ font-size:15px; line-height:1.55; text-align:center; margin: 0 0 18px; padding: 0 20px; }
+.signup-benefits{
+  list-style:none; margin: 0 0 32px; padding: 18px 20px;
+  display:flex; flex-direction:column; gap:12px;
+  background: var(--surface-muted);
+  border-radius: var(--element-border-radius);
+}
+.signup-benefits li{
+  display:grid; grid-template-columns: 22px 1fr; gap:10px; align-items:start;
+  font-size:14.5px; line-height:1.5;
+}
+.signup-benefits svg{ width:20px; height:20px; color: var(--primary-color); margin-top:1px; }
+
+.signup-form{ display:flex; flex-direction:column; gap:16px; margin: 0; }
+.signup-field{ display:flex; flex-direction:column; gap:6px; }
+.signup-field-label{ font-size:13px; font-weight:700; color: var(--text-color); }
+.signup-field-input{
+  width:100%; font-family: var(--font-body); font-size:16px;
+  padding:13px 14px; border-radius: var(--element-border-radius);
+  border: 1px solid var(--border-strong); background:#fff; color: var(--headline-color);
+  cursor:pointer;
+}
+.signup-field-input::placeholder{ color: var(--text-muted); }
+.signup-field-input:focus{
+  outline:none; border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 16%, transparent);
+}
+.splash-page-container:not([data-flow-state="empty"]) .signup-field-input{ border-color: var(--headline-color); }
+
+.signup-checkbox{
+  display:flex; align-items:flex-start; gap:10px;
+  font-size:13px; line-height:1.5; color: var(--text-color); cursor:pointer;
+}
+.signup-checkbox input{
+  width:20px; height:20px; flex-shrink:0; margin:0;
+  accent-color: var(--primary-color); cursor:pointer;
+}
+.signup-form .cta-button{ margin-top: 8px; }
+
+/* ---- Form fields (preview toggle, future CMS field) ----
+   "two": first name + one "mobile or email" field.
+   "three": mobile and email as separate fields, at least one required,
+   so a visitor can leave both. */
+.signup-pair{ display:flex; flex-direction:column; gap:16px; }
+.signup-hint{ font-size:12.5px; line-height:1.4; color: var(--text-muted); margin: -8px 0 0; }
+.splash-page-container[data-fields="two"] [data-fields-only="three"],
+.splash-page-container[data-fields="three"] [data-fields-only="two"]{ display:none; }
+
+/* ---- Screens: empty form / filled form / confirmed ----
+   data-flow-state lives on .splash-page-container. The demo moves through
+   the three values on click; the preview bar can jump to any of them. */
+[data-panel]{ display:none; }
+.splash-page-container[data-flow-state="empty"] [data-panel="form"],
+.splash-page-container[data-flow-state="filled"] [data-panel="form"]{ display:block; }
+.splash-page-container[data-flow-state="confirmed"] [data-panel="confirmed"]{ display:block; }
+
+[data-panel="confirmed"]{ text-align:center; }
+.confirm-icon{
+  width:64px; height:64px; margin: 0 auto 8px; border-radius:50%;
+  background: var(--primary-color); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+}
+.confirm-icon svg{ width:30px; height:30px; }
+.confirm-title{ font-size:32px; font-weight:800; letter-spacing:-0.01em; margin:10px 0 24px; }
+.confirm-desc{ font-size:16px; line-height:1.55; color: var(--text-color); margin:0 0 32px; padding: 0 20px; }
+
+/* ---- Footer ---- */
+.rd-footer{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.rd-footer img{ height:22px; width:auto; opacity:.85; }

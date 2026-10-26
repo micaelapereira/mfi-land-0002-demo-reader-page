@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://calameo.com https://*.calameo.com; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../assets/airzoon-pin-mark.png">
+<title>airZoon Pulse — Reader Page · variants</title>
+<style>
+  :root{
+    --color-primary: #E0401C;
+    --surface-0: #F4F4F5; --surface-2: #FFFFFF; --border: #E8E8EA;
+    --text-primary: #18181B; --text-secondary: #52525B; --text-muted: #71717A;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0; background: var(--surface-0); color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page-header{ display:flex; flex-direction:column; align-items:flex-start; gap:24px; padding: 28px 40px 0; max-width: 900px; margin:0 auto; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; width:fit-content;
+    font-size:13px; font-weight:600; color: var(--text-secondary);
+    text-decoration:none; padding:6px 12px; border-radius:999px;
+    border:1px solid var(--border); background: var(--surface-2);
+  }
+  .back-link:hover{ border-color: var(--color-primary); color: var(--color-primary); }
+  .brand-logo{ height:88px; width:auto; display:block; }
+  main{ max-width: 900px; margin: 0 auto; padding: 32px 40px 96px; }
+  h1{ font-size: clamp(24px, 3vw, 30px); font-weight:700; margin:0 0 12px; }
+  .intro p{ font-size:14.5px; color: var(--text-secondary); line-height:1.65; max-width:66ch; margin:0 0 8px; }
+  .brand-section{ margin-top: 36px; }
+  .brand-section h2{ font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color: var(--text-secondary); margin:0 0 14px; }
+  .card-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+  .variant-card{
+    display:flex; flex-direction:column; gap:10px;
+    background: var(--surface-2); border:1px solid var(--border); border-radius:6px; padding: 22px; text-decoration:none;
+  }
+  .variant-card:hover{ border-color: var(--color-primary); }
+  .variant-card h3{ font-size:16.5px; font-weight:600; color: var(--text-primary); margin:0; }
+  .variant-card p{ font-size:13px; color: var(--text-secondary); line-height:1.55; margin:0; }
+  .variant-card .go{ font-size:13px; font-weight:600; color: var(--color-primary); margin-top:auto; padding-top:4px; }
+  @media (max-width: 780px){
+    .card-grid{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px){
+    .page-header{ padding: 24px 24px 0; }
+    main{ padding: 24px 24px 72px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="page-header">
+    <img class="brand-logo" src="../assets/airzoon-logo.png" alt="airZoon">
+    <a class="back-link" href="../../index.html">← All landing pages</a>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h1>Pulse — Reader Page: layout variants</h1>
+      <p>Click-through demo for MadinMag (EWAG). A visitor sees the MadinMag ad on a venue's splash page in the airZoon network, opens the landing, reads the magazine in the page, and leaves a first name plus mobile or email to get new issues and event invitations.</p>
+      <p><strong>Option A and option B differ only in the order of the page.</strong> A puts the magazine first and asks for the sign-up after it: reading comes first, and the visitor signs up once they like it. B puts the sign-up first and the magazine below it: on a phone the reader fills the screen and captures the scroll, so with A many visitors never reach the form. Content, copy and the three screens (empty form, filled form, confirmation) are the same in both.</p>
+      <p><strong>Form fields: two versions to compare.</strong> "Mobile or email" asks for a first name plus one field for a mobile or an email: the shortest form. "Mobile + email" splits it into two fields so the visitor can leave both, which gives more contact data. In both, the first name is required, plus at least one of mobile or email. Switch between them with the gear icon.</p>
+      <p><strong>About the gear icon (top left of each page):</strong> it is a review tool only and will not be part of the final page. It opens a bar to try the options in this demo, such as the screen, background, header or form fields.</p>
+    </div>
+
+    <div class="brand-section">
+      <h2>Full flow, from the splash page</h2>
+      <div class="card-grid">
+        <a class="variant-card" href="entree-skillfor.html?next=a">
+          <h3>Flow — Option A (reader first)</h3>
+          <p>Starts on the Skillfor Campus splash page with the MadinMag ad in Ad Zone 15 (300 × 250). The ad opens the landing with the magazine at the top and the sign-up below it.</p>
+          <span class="go">View →</span>
+        </a>
+        <a class="variant-card" href="entree-skillfor.html?next=b">
+          <h3>Flow — Option B (sign-up first)</h3>
+          <p>Same splash page and ad. The ad opens the landing with the sign-up at the top and the magazine below it.</p>
+          <span class="go">View →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="brand-section">
+      <h2>MadinMag landing</h2>
+      <div class="card-grid">
+        <a class="variant-card" href="variant-madinmag-lecteur.html">
+          <h3>Option A — Reader first</h3>
+          <p>Cover and headline, the embedded reader right away, then the "Ne ratez rien" sign-up card below. Best for reading; the form is easy to miss on a phone. Confirmation replaces the form.</p>
+          <span class="go">View →</span>
+        </a>
+        <a class="variant-card" href="variant-madinmag-inscription.html">
+          <h3>Option B — Sign-up first</h3>
+          <p>Cover and headline with the sign-up in the same card, a quiet "Lire le magazine ↓" link, then the embedded reader. Best for collecting contacts; reading stays open to everyone. Confirmation replaces the form.</p>
+          <span class="go">View →</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
